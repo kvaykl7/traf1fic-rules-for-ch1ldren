@@ -1,0 +1,793 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #667eea;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+nav a:hover {
+    color: #667eea;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #667eea;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+main {
+    margin-top: 80px;
+    padding: 2rem 0;
+}
+
+section {
+    padding: 4rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80vh;
+    text-align: left;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #fffb00, #00fff2);  /* ← Красный-зеленый */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #e5ff00;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.traffic-light {
+    width: 140px;
+    height: 360px;
+    background: #2a2a2a;
+    border-radius: 12px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 
+        0 6px 24px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 2px solid #444;
+    position: relative;
+}
+
+.traffic-light::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: #333;
+    border-radius: 3px;
+    border: 2px solid #555;
+}
+
+.light {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: #333;
+    transition: all 0.3s ease;
+    border: 3px solid #222;
+    box-shadow: 
+        inset 0 0 15px rgba(0, 0, 0, 0.8),
+        0 2px 6px rgba(0, 0, 0, 0.4);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.light::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 18px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+}
+
+.light.red { 
+    background: radial-gradient(circle at center, #ff4444, #cc1111);
+    box-shadow: 
+        0 0 20px #ff2222, 
+        0 0 40px rgba(255, 34, 34, 0.3),
+        inset 0 0 12px rgba(255, 255, 255, 0.2),
+        0 2px 6px rgba(0, 0, 0, 0.4);
+    border-color: #ff1111;
+}
+
+.light.yellow { 
+    background: radial-gradient(circle at center, #ffaa00, #cc7700);
+    box-shadow: 
+        0 0 20px #ff9900, 
+        0 0 40px rgba(255, 153, 0, 0.3),
+        inset 0 0 12px rgba(255, 255, 255, 0.2),
+        0 2px 6px rgba(0, 0, 0, 0.4);
+    border-color: #ff8800;
+}
+
+.light.green { 
+    background: radial-gradient(circle at center, #44ff44, #11cc11);
+    box-shadow: 
+        0 0 20px #22ff22, 
+        0 0 40px rgba(34, 255, 34, 0.3),
+        inset 0 0 12px rgba(255, 255, 255, 0.2),
+        0 2px 6px rgba(0, 0, 0, 0.4);
+    border-color: #11ff11;
+}
+
+.rules {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+}
+
+.rules h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: white;
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.rule-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.rule-card:hover {
+    transform: translateY(-5px);
+}
+
+.rule-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.rule-card h3 {
+    color: #667eea;
+    margin-bottom: 1rem;
+}
+
+.game-section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.game-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #667eea;
+}
+
+.game-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.pgSettings { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: -0.5rem 0 1rem; }
+.pgSettings > div { display: flex; flex-direction: column; gap: 0.5rem; }
+.pgSettings label { background: #f5f7ff; padding: 0.5rem 0.75rem; border-radius: 999px; border: 1px solid #e5e7eb; font-weight: 600; color: #374151; }
+.pgSettings select { padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 8px; background: white; }
+.pgSettings .game-button { padding: 0.5rem 0.9rem; border-radius: 999px; }
+
+.question-container {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.question-container h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.options {
+    display: grid;
+    gap: 1rem;
+}
+
+.option {
+    padding: 1rem;
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.option:hover {
+    border-color: #667eea;
+    background: #f0f4ff;
+}
+
+.option.correct {
+    border-color: #28a745;
+    background: #d4edda;
+    color: #155724;
+}
+
+.option.incorrect {
+    border-color: #dc3545;
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.game-controls {
+    text-align: center;
+}
+
+.game-button {
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.game-button:hover {
+    transform: translateY(-2px);
+}
+
+.sticker-game-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.sticker-game-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.sticker-game-btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.sticker-game-btn:hover:before {
+    left: 100%;
+}
+
+.result {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.result.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.result.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Контакты */
+.connect {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.contact-container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+.contact-intro { color: #555; margin-bottom: 1rem; }
+/* (убрано) стили формы — контакт через Telegram */
+
+/* TG контакт-блок */
+.tg-contact { background: linear-gradient(180deg, #ffffff, #f8fafc); border: 1px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; box-shadow: 0 8px 28px rgba(0,0,0,0.06); }
+.tg-points { margin: 0.5rem 0 1.25rem 1.25rem; color:#374151; }
+.tg-points li { margin: 0.25rem 0; }
+.tg-button { display:inline-block; padding: 0.9rem 1.4rem; border-radius: 999px; background: linear-gradient(45deg, #229ed9, #1477a2); color:#fff; font-weight:700; text-decoration:none; box-shadow: 0 10px 24px rgba(34,158,217,0.3); transition: transform .2s ease, box-shadow .2s ease; }
+.tg-button:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(34,158,217,0.36); }
+.tg-hint { margin-top: 0.75rem; color: #6b7280; }
+.admin-link { color:#2563eb; font-weight:700; text-decoration:none; }
+.admin-link:hover { text-decoration: underline; }
+.or-line { display:flex; align-items:center; gap: 0.75rem; color:#9ca3af; margin: 1rem 0; }
+.or-line::before, .or-line::after { content:''; flex:1; height:1px; background:#e5e7eb; }
+.or-line span { font-size: 0.9rem; }
+.simple-form .form-row { display:flex; }
+.simple-form input, .simple-form textarea { width: 100%; padding: 0.8rem 1rem; border: 2px solid #e9ecef; border-radius: 10px; font-size: 1rem; outline: none; }
+.simple-form textarea { resize: vertical; }
+.simple-form input:focus, .simple-form textarea:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.12); }
+.sf-hint { margin-top: 0.5rem; color:#6b7280; font-size: 0.9rem; }
+
+/* Рейтинг */
+.rating-box { margin-top: 1rem; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem; }
+.rating-title { font-weight: 700; color:#374151; margin-bottom: 0.5rem; }
+.rating { font-size: 2rem; color: #d1d5db; cursor: pointer; user-select: none; display: flex; gap: 0.25rem; justify-content:center; }
+.rating .star.active, .rating .star.hover { color: #f59e0b; text-shadow: 0 4px 12px rgba(245, 158, 11, 0.35); }
+.rating-stats { margin-top: 1rem; font-size: 0.95rem; color:#374151; }
+.rating-avg { text-align:center; margin-bottom: 0.5rem; font-weight: 700; }
+.rating-bars { display: grid; gap: 0.25rem; }
+.rating-row { display:flex; align-items:center; gap: 0.5rem; }
+.rating-row > span:first-child { width: 14px; text-align:right; color:#6b7280; }
+.rating-bar { flex: 1; height: 10px; background:#e5e7eb; border-radius: 999px; overflow:hidden; }
+.rating-bar > div { height: 100%; background: linear-gradient(90deg, #f59e0b, #fbbf24); width: 0%; transition: width .3s ease; }
+
+@media (max-width: 768px) { }
+
+/* Юный пешеход */
+#pedestrianGameArea {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 380px;
+    margin: 0 auto 1rem;
+    background: #4caf50; /* общий фон — тротуары зальём отдельными блоками */
+    border: 3px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#pgRoad {
+    position: absolute;
+    top: 140px; /* между тротуарами */
+    width: 100%;
+    height: 80px;
+    background: #555;
+    border-top: 2px solid #eee;
+    border-bottom: 2px solid #eee;
+}
+
+.pgCrosswalk {
+    /* вертикальный пешеходный переход строго на дороге */
+    position: absolute;
+    top: 0;            /* внутри дороги — от её верхней границы */
+    height: 100%;      /* на всю высоту дороги */
+    width: 140px;      /* ширина зебры */
+    left: calc(50% - 70px); /* по центру дороги/экрана */
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.95) 0 14px,
+        transparent 14px 26px
+    );
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.25) inset;
+    opacity: 0.95;
+    z-index: 2;
+}
+
+.pgCenterLine {
+    position: absolute;
+    top: 178px; /* по центру дороги */
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        #fffb 0 20px,
+        transparent 20px 40px
+    );
+}
+
+#pgSidewalkTop,
+#pgSidewalkBottom {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: #4caf50; /* трава/тротуар */
+}
+
+#pgSidewalkTop { top: 0; border-bottom: 4px solid #2f2f2f; }
+#pgSidewalkBottom { bottom: 0; border-top: 4px solid #2f2f2f; }
+.pgCurb {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, #bbb, #ddd);
+    box-shadow: inset 0 2px 2px rgba(0,0,0,0.15);
+    z-index: 3;
+}
+#pgCurbTop { top: 132px; }
+#pgCurbBottom { top: 220px; }
+
+.pgCrosswalk {
+    /* убедимся, что зебра поверх разметки */
+    z-index: 2;
+}
+
+.pgLane {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+}
+
+#pgLane1 { top: 140px; }
+#pgLane2 { top: 180px; }
+
+#pgPlayer {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    top: 300px;
+    left: calc(50% - 18px);
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    z-index: 5;
+}
+
+.pgCar {
+    position: absolute;
+    width: 60px;
+    height: 36px;
+    border-radius: 6px;
+    top: 0;
+    z-index: 3; /* cars above crosswalk */
+}
+
+#pgTrafficLight {
+    position: absolute;
+    top: 100px;
+    left: 16px;
+    width: 44px;
+    height: 120px;
+    background: #333;
+    border-radius: 10px;
+    padding: 6px;
+    box-sizing: border-box;
+    z-index: 6;
+}
+
+.pgLight {
+    width: 30px;
+    height: 30px;
+    margin: 6px auto;
+    border-radius: 50%;
+    background: #555;
+    box-shadow: inset 0 0 5px #000;
+}
+.pgLight.red.on { background: #ff4444; box-shadow: 0 0 15px #ff4444; }
+.pgLight.yellow.on { background: #ffcc00; box-shadow: 0 0 15px #ffcc00; }
+.pgLight.green.on { background: #22cc22; box-shadow: 0 0 15px #22cc22; }
+
+/* Экранные кнопки управления */
+.pgControls {
+    display: grid;
+    gap: 0.5rem;
+    place-items: center;
+    margin: 1rem 0 0.5rem;
+}
+
+/* Туториал */
+.pgTutorial { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: grid; place-items: center; z-index: 1200; }
+.pgTutorialBox { background: #fff; padding: 1.5rem; border-radius: 16px; max-width: 520px; width: calc(100% - 2rem); box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.pgTutorialBox h3 { color: #111827; margin-bottom: 0.75rem; }
+.pgTutorialBox ul { margin: 0 0 1rem 1.25rem; color: #374151; }
+
+/* Коллекция наград */
+.awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; }
+.award-card { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.06); transition: transform 0.2s; }
+.award-card:hover { transform: translateY(-2px); }
+.award-card.locked { opacity: 0.5; filter: grayscale(1); }
+.award-sticker { font-size: 2rem; margin-bottom: 0.25rem; }
+.award-title { font-weight: 700; color: #111827; }
+.award-desc { font-size: 0.9rem; color: #6b7280; }
+
+/* Статистика */
+.stats-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.stat-card { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; text-align: center; }
+.stat-value { font-size: 2rem; font-weight: bold; color: #667eea; }
+.stat-label { color: #6b7280; margin-top: 0.5rem; }
+
+
+/* Сезонные темы (расширенные) */
+#pedestrianGameArea.winter { background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%); }
+#pedestrianGameArea.winter #pgSidewalkTop, #pedestrianGameArea.winter #pgSidewalkBottom { background: #f5f7fa; }
+#pedestrianGameArea.winter #pgRoad { background: #6b7785; }
+#pedestrianGameArea.winter .pgCrosswalk { background: repeating-linear-gradient(to bottom, #fff 0 14px, #e3f2fd 14px 26px); }
+#pedestrianGameArea.winter .snowflake { position:absolute; top:-20px; color:#ffffff; opacity:0.9; pointer-events:none; animation:snowfall linear forwards; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.15)); }
+@keyframes snowfall { to { transform: translateY(420px) rotate(360deg); opacity: 0.6; } }
+#pedestrianGameArea.winter .snowbank { position:absolute; left:0; right:0; bottom:0; height:18px; background: linear-gradient(#fff,#e8f1ff); box-shadow: inset 0 4px 8px rgba(0,0,0,0.06); z-index:4; }
+
+#pedestrianGameArea.summer { background: linear-gradient(135deg, #fff7e6 0%, #ffecb3 100%); }
+#pedestrianGameArea.summer #pgSidewalkTop, #pedestrianGameArea.summer #pgSidewalkBottom { background: #66bb6a; }
+#pedestrianGameArea.summer #pgRoad { background: #505050; }
+#pedestrianGameArea.summer .sun { position:absolute; right:12px; top:12px; width:36px; height:36px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff59d, #ffeb3b 60%, #fbc02d); box-shadow: 0 0 30px rgba(255,235,59,0.7); animation: sunPulse 4s ease-in-out infinite; }
+@keyframes sunPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+#pedestrianGameArea.summer .leaf { position:absolute; top:-20px; color:#2e7d32; opacity:0.9; pointer-events:none; animation: leafFall linear forwards; }
+@keyframes leafFall { to { transform: translate(40px, 420px) rotate(280deg); opacity: 0.6; } }
+
+#pedestrianGameArea.rain { background: linear-gradient(135deg, #e8ebef 0%, #cfd8dc 100%); }
+#pedestrianGameArea.rain #pgSidewalkTop, #pedestrianGameArea.rain #pgSidewalkBottom { background: #7fb685; }
+#pedestrianGameArea.rain #pgRoad { background: #4b5563; box-shadow: inset 0 0 40px rgba(255,255,255,0.07); }
+#pedestrianGameArea.rain .raindrop { position:absolute; top:-20px; width:2px; height:14px; background: linear-gradient(#a7c7ff, #6495ed); opacity:0.8; pointer-events:none; animation: raindrop linear forwards; }
+@keyframes raindrop { to { transform: translateY(420px); opacity: 0.2; } }
+#pedestrianGameArea.rain .puddle { position:absolute; bottom:8px; left:50%; transform: translateX(-50%); width:46%; height:10px; background: radial-gradient(ellipse at center, rgba(120,170,220,0.6), rgba(120,170,220,0.05)); border-radius:50%; filter: blur(0.2px); animation: ripple 3s ease-in-out infinite; }
+@keyframes ripple { 0%,100% { opacity:0.45; } 50% { opacity:0.7; } }
+
+/* Бонусные эффекты */
+.pgPlayer.invisible { opacity: 0.3; }
+.pgPlayer.slow-motion { animation: slowMotion 0.5s ease-in-out; }
+@keyframes slowMotion { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.95); } }
+
+/* Частицы при достижениях */
+.particles { position: absolute; pointer-events: none; z-index: 1000; }
+.particle { position: absolute; width: 8px; height: 8px; background: #ffd700; border-radius: 50%; animation: particle 1s ease-out forwards; }
+@keyframes particle {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-100px) scale(0); opacity: 0; }
+}
+
+/* Тёмная тема */
+body.pg-dark { background: #0f172a; color: #e5e7eb; }
+body.pg-dark header { background: rgba(15, 23, 42, 0.9); }
+body.pg-dark .game-section { background: #111827; }
+body.pg-dark .rule-card, body.pg-dark .sign-item { background: #0b1220; color: #d1d5db; }
+body.pg-dark .game-button { background: linear-gradient(45deg, #334155, #1f2937); }
+.pgControlsRow {
+    display: flex;
+    gap: 0.75rem;
+}
+.pgBtn {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: #fff;
+    font-size: 24px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    cursor: pointer;
+    touch-action: manipulation;
+}
+.pgBtn:active { transform: scale(0.98); }
+
+@media (min-width: 769px) {
+    .pgControls { margin-top: 0.5rem; }
+}
+
+.signs {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+}
+
+.signs h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: white;
+}
+
+.signs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.sign-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.sign-item:hover {
+    transform: translateY(-5px);
+}
+
+.sign-symbol {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.sign-item h4 {
+    color: #667eea;
+}
+
+footer {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+.site-credit { margin-top: 0.5rem; color: #cbd5e1; }
+
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .traffic-light {
+        width: 100px;
+        height: 260px;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+    .traffic-light::before {
+        width: 14px;
+        height: 14px;
+        top: -7px;
+        border-radius: 2px;
+        border: 1px solid #555;
+    }
+    
+    .light {
+        width: 60px;
+        height: 60px;
+        border: 2px solid #222;
+        box-shadow: 
+            inset 0 0 10px rgba(0, 0, 0, 0.8),
+            0 1px 4px rgba(0, 0, 0, 0.4);
+    }
+    
+    .light::before {
+        width: 12px;
+        height: 12px;
+        top: 20%;
+        left: 30%;
+    }
+    
+    nav ul {
+        gap: 1rem;
+    }
+    
+    .rules-grid,
+    .signs-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+}

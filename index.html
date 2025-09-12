@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПДД - Правила Дорожного Движения</title>
+    <meta name="description" content="Игровое изучение ПДД: викторина, игра Юный пешеход, дорожные знаки, советы по безопасности.">
+    <meta property="og:title" content="ПДД — Учимся безопасно и интересно">
+    <meta property="og:description" content="Викторина на 10 вопросов и игра Юный пешеход. Собирайте достижения!">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/og-image.png">
+    <meta property="og:url" content="/">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🚦 ПДД</div>
+            <ul>
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#rules">Правила</a></li>
+                <li><a href="#game">Игра</a></li>
+                <li><a href="#signs">Знаки</a></li>
+                <li><a href="#connect">Обратная связь</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Правила Дорожного Движения</h1>
+                <p>Изучайте ПДД легко и интересно! Проверьте свои знания в нашей мини-игре из 10 вопросов.</p>
+                <a href="#game" class="cta-button">Начать игру</a>
+            </div>
+            <div class="hero-image">
+                <div class="traffic-light">
+                    <div class="light red"></div>
+                    <div class="light yellow"></div>
+                    <div class="light green"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="rules" class="rules">
+            <h2>Основные правила ПДД</h2>
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <div class="rule-icon">🚸</div>
+                    <h3>Пешеходный переход</h3>
+                    <p>Переходите дорогу только по пешеходному переходу на зеленый сигнал светофора.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon">🚦</div>
+                    <h3>Светофор</h3>
+                    <p>🔴Красный: ㅤждём, стоим. ㅤㅤ🟡Жёлтый: готовимся, тормозим. ㅤ🟢 Зеленый: едем или идём.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon">🧭🚶‍♀️</div>
+                    <h3>Правила движения на улице</h3>
+                    <p>Двигайся по велосипедной дорожке или по краю дороги, уступай пешеходам на тротуаре, переходи дорогу на пешеходном переходе.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon">🚫</div>
+                    <h3>Движение запрещено</h3>
+                    <p>Не въезжайте в зону действия знака "Движение запрещено".</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon">👶</div>
+                    <h3>Дети на дороге</h3>
+                    <p>Знак «дети» напоминает велосипедисту снизить скорость и быть внимательным, чтобы безопасно пропускать детей на дороге.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon">🚂</div>
+                    <h3>Железнодорожный переезд</h3>
+                    <p>При знаке "Железнодорожный переезд" будьте особенно внимательны, так же следуйте указаниям светофора.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon">🔦🟡</div>
+                    <h3>Светоотражающие элементы и видимость</h3>
+                    <p> Носи яркую одежду и светлоотражающие детали на велосипеде/самокате.</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon">🚨</div>
+                    <h3>Специальные сигналы</h3>
+                    <p>Пропускайте транспорт с включенными спецсигналами (скорая, пожарная, полиция).</p>
+                </div>
+                <div class="rule-card">
+                    <div class="rule-icon">🚲🛴</div>
+                    <h3>Безопасная езда на велосипеде и самокате </h3>
+                    <p>Всегда надень защиту (шлем, наколенники, налокотники) , держи обе руки на руле и поглядывай по сторонам.</p>
+                </div>
+            </div>
+        </section>
+        <section id="game" class="game-section">
+            <h2>Мини-игра "Знаток ПДД"</h2>
+            <div class="game-container">
+                <div class="game-info">
+                    <div class="score">Счет: <span id="score">0</span></div>
+                    <div class="question-number">Вопрос: <span id="questionNumber">1</span>/10</div>
+                </div>
+                
+                <div class="question-container">
+                    <h3 id="question">Загружаем вопрос...</h3>
+                    <div class="options" id="options">
+                        <!--Варианты ответов  JS--> 
+                    </div>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="startGame" class="game-button">Начать игру</button>
+                    <button id="nextQuestion" class="game-button" style="display: none;">Следующий вопрос</button>
+                </div>
+                
+                <div class="result" id="result" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Раздел игры "Юный пешеход" (разблокируется после викторины при ≥50%) -->
+        <section id="pedestrian-game" class="game-section" style="display: none;">
+            <h2>Игра "Юный пешеход"</h2>
+            <div class="game-container">
+                <div class="game-info">
+                    <div>Переходов: <span id="pedestrianCount">0</span></div>
+                    <div>Серия без нарушений: <span id="pedestrianStreak">0</span></div>
+                    <div>Рекорд: <span id="pedestrianBest">0</span></div>
+                    <div>Цель: <span id="pedestrianGoal">3</span> подряд</div>
+                </div>
+
+                <div class="pgSettings">
+                    <div class="pgCharacter">
+                        <label>Персонаж:</label>
+                        <select id="pgCharacterSelect">
+                            <option value="👦">Мальчик</option>
+                            <option value="👧">Девочка</option>
+                            <option value="👨">Мужчина</option>
+                            <option value="👩">Женщина</option>
+                        </select>
+                    </div>
+                    <div class="pgTheme">
+                        <label>Тема:</label>
+                        <select id="pgThemeSelect">
+                            <option value="normal">Обычная</option>
+                            <option value="winter">Зима</option>
+                            <option value="summer">Лето</option>
+                            <option value="rain">Дождь</option>
+                        </select>
+                    </div>
+                    <label><input type="checkbox" id="pgSetDark"> Тёмная тема</label>
+                    <button id="pgOpenCollection" class="game-button" type="button">Достижения 🏅</button>
+                    <button id="pgOpenStats" class="game-button" type="button">Статистика 📊</button>
+                    <button id="pgResetProgress" class="game-button" type="button">Сброс прогресса</button>
+                </div>
+
+                <div id="pedestrianGameArea">
+                    <div id="pgSidewalkTop" aria-hidden="true"></div>
+                    <div id="pgCurbTop" aria-hidden="true"></div>
+                    <div id="pgRoad">
+                        <div class="pgCrosswalk" aria-hidden="true"></div>
+                        <div class="pgCenterLine" aria-hidden="true"></div>
+                        <div class="pgLane" id="pgLane1"></div>
+                        <div class="pgLane" id="pgLane2"></div>
+                    </div>
+                    <div id="pgCurbBottom" aria-hidden="true"></div>
+                    <div id="pgSidewalkBottom" aria-hidden="true"></div>
+                    <div id="pgPlayer" title="Пешеход">👦</div>
+                    <div id="pgTrafficLight" title="Светофор">
+                        <div class="pgLight red"></div>
+                        <div class="pgLight yellow"></div>
+                        <div class="pgLight green"></div>
+                    </div>
+                </div>
+
+                <div class="result" id="pedestrianMessage"></div>
+
+               
+                <div class="pgControls">
+                    <button class="pgBtn" id="pgBtnUp" aria-label="Вперёд (W)">⬆️</button>
+                    <div class="pgControlsRow">
+                        <button class="pgBtn" id="pgBtnLeft" aria-label="Влево (A)">⬅️</button>
+                        <button class="pgBtn" id="pgBtnDown" aria-label="Назад (S)">⬇️</button>
+                        <button class="pgBtn" id="pgBtnRight" aria-label="Вправо (D)">➡️</button>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="pedestrianStart" class="game-button">Начать</button>
+                    <button id="pedestrianRestart" class="game-button" style="display: none;">Играть снова</button>
+                </div>
+
+                <!-- Туториал-оверлей -->
+                <div id="pgTutorial" class="pgTutorial" style="display:none;">
+                    <div class="pgTutorialBox">
+                        <h3>Как играть</h3>
+                        <ul>
+                            <li>Дождитесь зелёного света для пешехода.</li>
+                            <li>Двигайтесь вперёд кнопкой ⬆️ или W (на телефоне — стрелки).</li>
+                            <li>Машины останавливаются перед зеброй на зелёный.</li>
+                            <li>На красный можно идти, но это нарушение — серия сбросится.</li>
+                            <li>Собирайте серии 3/5/10/20 — получайте стикеры!</li>
+                        </ul>
+                        <button id="pgTutorialClose" class="game-button" type="button">Понятно!</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Экран достижений -->
+        <section id="awards" class="awards game-section" style="display:none;">
+            <h2>Достижения</h2>
+            <div class="game-container">
+                <div id="awardsGrid" class="awards-grid" aria-live="polite"></div>
+                <div class="game-controls"><button id="awardsClose" class="game-button" type="button">Закрыть</button></div>
+            </div>
+        </section>
+
+        <!-- Экран статистики -->
+        <section id="stats" class="stats game-section" style="display:none;">
+            <h2>Статистика игрока</h2>
+            <div class="game-container">
+                <div id="statsContent" class="stats-content"></div>
+                <div class="game-controls"><button id="statsClose" class="game-button" type="button">Закрыть</button></div>
+            </div>
+        </section>
+
+
+        <section id="signs" class="signs">
+            <h2>Дорожные знаки</h2>
+            <div class="signs-grid">
+                <div class="sign-item">
+                    <div class="sign-symbol">🚸</div>
+                    <h4>Пешеходный переход</h4>
+                </div>
+                <div class="sign-item">
+                    <div class="sign-symbol">🚏</div>
+                    <h4>Автобусная остановка</h4>
+                </div>
+                <div class="sign-item">
+                    <div class="sign-symbol">⚠️</div>
+                    <h4>Осторожно</h4>
+                </div>
+                <div class="sign-item">
+                    <div class="sign-symbol">🅿️</div>
+                    <h4>Парковка</h4>
+                </div>
+                <div class="sign-item">
+                    <div class="sign-symbol">⛐</div>
+                    <h4>Скользкая дорога</h4>
+                </div>
+                <div class="sign-item">
+                    <div class="sign-symbol">🚳</div>
+                    <h4>Движение на велосипеде запрещено </h4>
+                </div>
+                <div class="sign-item">
+                    <div class="sign-symbol">🚧</div>
+                    <h4>Дорожные работы</h4>
+                </div> 
+                <div class="sign-item">
+                    <div class="sign-symbol">🛑</div>
+                    <h4>Стоп</h4>
+                </div>  
+            </div>
+        </section>
+
+        <section id="connect" class="connect">
+            <h2>Обратная связь</h2>
+            <div class="contact-container">
+                <div class="tg-contact">
+                    <p class="contact-intro">Свяжитесь с администратором сайта:</p>
+                    <p class="tg-hint">Юзернейм: <a class="admin-link" href="https://t.me/traffic1support_bot" target="_blank" rel="noopener">@traffic1support_bot</a></p>
+
+                    <div class="rating-box">
+                        <div class="rating-title">Оцените сайт</div>
+                        <div id="ratingStars" class="rating">
+                            <span class="star" data-value="1">★</span>
+                            <span class="star" data-value="2">★</span>
+                            <span class="star" data-value="3">★</span>
+                            <span class="star" data-value="4">★</span>
+                            <span class="star" data-value="5">★</span>
+                        </div>
+                        <div class="game-controls"><button id="ratingSubmit" class="game-button" type="button">Отправить оценку</button></div>
+                        <div id="ratingStatus" class="result" style="display:none;"></div>
+                        <div id="ratingStats" class="rating-stats">
+                            <div class="rating-avg">Средняя оценка: <span id="ratingAvg">—</span> (<span id="ratingTotal">0</span> голосов)</div>
+                            <div class="rating-bars">
+                                <div class="rating-row"><span>5</span><div class="rating-bar"><div id="bar5"></div></div><span id="count5">0</span></div>
+                                <div class="rating-row"><span>4</span><div class="rating-bar"><div id="bar4"></div></div><span id="count4">0</span></div>
+                                <div class="rating-row"><span>3</span><div class="rating-bar"><div id="bar3"></div></div><span id="count3">0</span></div>
+                                <div class="rating-row"><span>2</span><div class="rating-bar"><div id="bar2"></div></div><span id="count2">0</span></div>
+                                <div class="rating-row"><span>1</span><div class="rating-bar"><div id="bar1"></div></div><span id="count1">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ПДД - Правила Дорожного Движения. Изучайте правила и будьте в безопасности!</p>
+        <p class="site-credit">Работа сделана <strong>Харьковой Софией</strong></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
