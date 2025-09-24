@@ -123,6 +123,15 @@ function showQuestion() {
         optionElement.className = 'option';
         optionElement.textContent = option;
         optionElement.addEventListener('click', () => selectOption(index));
+        // Accessibility and haptics
+        optionElement.setAttribute('role', 'button');
+        optionElement.setAttribute('tabindex', '0');
+        optionElement.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectOption(index);
+            }
+        });
         optionsElement.appendChild(optionElement);
     });
 }
@@ -147,8 +156,12 @@ function selectOption(selectedIndex) {
         score++;
         updateScore();
         showResult('Правильно! 🎉', 'success');
+        // Haptic feedback (success)
+        if (navigator.vibrate) navigator.vibrate(30);
     } else {
         showResult(`Неправильно! Правильный ответ: ${questionData.options[questionData.correct]}`, 'error');
+        // Haptic feedback (error)
+        if (navigator.vibrate) navigator.vibrate([20, 40, 20]);
     }
     
     if (currentQuestion < gameData.length - 1) {
@@ -610,6 +623,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Запускаем анимацию светофора на главной странице
     animateTrafficLight();
     
+    // Хелпер подсветки активной ссылки
+    const setActiveLink = (id) => {
+        document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+        });
+    };
+
+    // Инициализация активного пункта при загрузке/хеше
+    const initialId = (location.hash || '#home').replace('#','');
+    setActiveLink(initialId);
+    window.addEventListener('hashchange', () => {
+        const id = (location.hash || '#home').replace('#','');
+        setActiveLink(id);
+    });
+
     // Плавная прокрутка для навигации
     document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -620,6 +648,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     behavior: 'smooth',
                     block: 'start'
                 });
+                const id = this.getAttribute('href').replace('#','');
+                setActiveLink(id);
             }
         });
     });
@@ -640,6 +670,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     console.log('Инициализация завершена!');
+
+    // Reveal only on hero at startup
+    try {
+        const heroReveal = document.querySelector('.hero.reveal');
+        if (heroReveal) {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            obs.observe(heroReveal);
+        }
+    } catch (_) {}
+
+    // Light parallax for hero image on scroll (mobile-friendly)
+    const hero = document.querySelector('.hero-image');
+    if (hero) {
+        let ticking = false;
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const y = window.scrollY || 0;
+                    hero.style.transform = `translateY(${Math.min(20, y * 0.06)}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    // Active nav link highlighting
+    // Scroll spy (reliable highlighting)
+    const sections = Array.from(document.querySelectorAll('main section[id]'));
+    const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+    const setActive = (id) => navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${id}`));
+    const recalcActive = () => {
+        const top = window.scrollY || document.documentElement.scrollTop || 0;
+        if (top < 80) { setActive('home'); return; }
+        let currentId = 'home';
+        for (const sec of sections) {
+            const rect = sec.getBoundingClientRect();
+            const y = rect.top + top; // page offset
+            if (top >= y - 100) currentId = sec.id; else break;
+        }
+        setActive(currentId);
+    };
+    recalcActive();
+    window.addEventListener('scroll', recalcActive, { passive: true });
 
     // Рейтинг 1-5 звёзд (локально)
     const ratingEl = document.getElementById('ratingStars');
