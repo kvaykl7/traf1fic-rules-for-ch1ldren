@@ -70,6 +70,21 @@ nav a:hover::after {
     width: 100%;
 }
 
+/* Active link highlighting */
+nav a.active {
+    color: #4f46e5;
+}
+nav a.active::after {
+    width: 100%;
+}
+
+/* Avoid hover "jump" on touch devices */
+@media (hover: none) {
+    .game-button:hover { transform: none; }
+    .sticker-game-btn:hover { transform: none; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); }
+    nav a:hover::after { width: 0; }
+}
+
 main {
     margin-top: 80px;
     padding: 2rem 0;
@@ -96,7 +111,7 @@ section {
 }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 6vw, 3.5rem);
     margin-bottom: 1rem;
     background: linear-gradient(45deg, #fffb00, #00fff2);  /* ← Красный-зеленый */
     -webkit-background-clip: text;
@@ -105,9 +120,10 @@ section {
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.6vw, 1.2rem);
     margin-bottom: 2rem;
-    color: #e5ff00;
+    color: #f9f9f9;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .cta-button {
@@ -132,6 +148,7 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .traffic-light {
@@ -150,6 +167,27 @@ section {
     border: 2px solid #444;
     position: relative;
 }
+
+/* Subtle floating animation for hero traffic light */
+.hero .traffic-light { 
+    animation: floatY 6s ease-in-out infinite;
+    will-change: transform;
+}
+@keyframes floatY {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+/* Animated cars in hero */
+.hero-cars { position: absolute; inset: 0; pointer-events: none; }
+.hero-car { position: absolute; font-size: 28px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+.hero-car.car-a { bottom: 6%; left: -10%; animation: carMoveA 8s linear infinite; }
+.hero-car.car-b { bottom: 12%; left: -15%; animation: carMoveB 10s linear infinite; }
+.hero-car.car-c { bottom: 18%; right: -12%; animation: carMoveC 11s linear infinite; }
+@keyframes carMoveA { 0%{ transform: translateX(0); } 100%{ transform: translateX(140%); } }
+@keyframes carMoveB { 0%{ transform: translateX(0) scale(1.05); } 100%{ transform: translateX(160%) scale(1.05); } }
+@keyframes carMoveC { 0%{ transform: translateX(0) scaleX(-1); } 100%{ transform: translateX(-160%) scaleX(-1); } }
 
 .traffic-light::before {
     content: '';
@@ -363,6 +401,16 @@ section {
     transform: translateY(-2px);
 }
 
+/* Gentle pulse to attract attention on key buttons */
+.game-button.pulse { 
+    animation: pulse 2.2s ease-in-out infinite;
+    will-change: transform, box-shadow;
+}
+@keyframes pulse {
+    0%, 100% { transform: translateY(0); box-shadow: 0 4px 15px rgba(102,126,234,0.35); }
+    50% { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(102,126,234,0.45); }
+}
+
 .sticker-game-btn {
     position: relative;
     overflow: hidden;
@@ -406,6 +454,24 @@ section {
     background: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
+}
+
+/* Scroll-reveal animation helpers */
+.reveal { 
+    opacity: 0; 
+    transform: translateY(16px); 
+    transition: opacity .6s ease, transform .6s ease; 
+}
+.reveal-visible { 
+    opacity: 1; 
+    transform: none; 
+}
+
+/* Strong focus styles for keyboard users */
+.option:focus-visible, .game-button:focus-visible, .pgBtn:focus-visible, nav a:focus-visible { 
+    outline: 3px solid #67e8f9; 
+    outline-offset: 2px; 
+    box-shadow: 0 0 0 4px rgba(103,232,249,0.35);
 }
 
 /* Контакты */
@@ -741,7 +807,7 @@ footer {
     }
     
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
     }
     
     .traffic-light {
@@ -790,4 +856,19 @@ footer {
         text-align: center;
     }
     
+}
+
+/* Additional mobile comfort tweaks */
+@media (max-width: 768px) {
+    .option { padding: 1.1rem; }
+    .pgBtn { width: 72px; height: 72px; font-size: 26px; }
+    .game-button { padding: 0.9rem 1.4rem; }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+    
+
 }
